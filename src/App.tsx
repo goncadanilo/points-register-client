@@ -1,13 +1,11 @@
-import { Button, ThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
 import React from 'react';
-import { theme } from './styles/globlal-styles';
+import { theme } from './themes/global-theme';
 
 function App(): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
+      <h1>Hello</h1>
     </ThemeProvider>
   );
 }
