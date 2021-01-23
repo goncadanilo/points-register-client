@@ -6,4 +6,13 @@ export const theme = createMuiTheme({
       main: '#219653',
     },
   },
+  typography: {
+    button: {
+      fontSize: '18px',
+      fontFamily: 'Montserrat',
+      fontWeight: 900,
+      textTransform: 'capitalize',
+    },
+    fontFamily: 'Montserrat',
+  },
 });
