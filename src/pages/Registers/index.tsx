@@ -4,10 +4,11 @@ import Content from '../../components/Content';
 import NavBar from '../../components/NavBar';
 import PointsData from '../../components/PointsData';
 
-const Dashboard: React.FC = () => {
+const Registers: React.FC = () => {
   return (
     <AppContainer>
       <NavBar />
+
       <Content>
         <PointsData />
       </Content>
@@ -15,4 +16,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Registers;
