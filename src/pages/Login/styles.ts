@@ -58,6 +58,12 @@ export const useStyles = makeStyles((theme: Theme) =>
       '& .MuiOutlinedInput-notchedOutline': {
         border: 0,
       },
+
+      '& .MuiOutlinedInput-input': {
+        fontSize: '16px',
+        fontFamily: 'Montserrat',
+        fontWeight: 400,
+      },
     },
     button: {
       border: 0,
