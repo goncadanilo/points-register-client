@@ -36,7 +36,7 @@ const NavBar: React.FC = () => {
             <List className={classes.list}>
               <Divider className={classes.divider} />
 
-              <Link className={classes.link} to="/">
+              <Link className={classes.active} to="/">
                 <ListItem className={classes.listItem}>
                   <ListItemIcon className={classes.listItemIcon}>
                     <DashboardIcon />
