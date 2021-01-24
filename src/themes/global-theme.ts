@@ -43,5 +43,12 @@ export const theme = createMuiTheme({
       lineHeight: '53px',
       letterSpacing: '0.02em',
     },
+    h6: {
+      fontFamily: 'Montserrat',
+      fontWeight: 300,
+      fontSize: '17px',
+      color: '#303030',
+      lineHeight: '27.72px',
+    },
   },
 });

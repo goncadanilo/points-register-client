@@ -6,7 +6,12 @@ const PointsData: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid
+      className={classes.grid}
+      container
+      justify="space-between"
+      alignItems="center"
+    >
       <Grid sm={5} container item>
         <Typography variant="h2" gutterBottom>
           Colaborador

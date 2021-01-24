@@ -58,8 +58,19 @@ export const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 300,
     },
     link: {
+      width: '100%',
       textDecoration: 'none',
       color: '#A5A5A5',
+    },
+    active: {
+      width: '100%',
+      textDecoration: 'none',
+      color: theme.palette.primary.main,
+      borderLeft: `5px solid ${theme.palette.primary.main}`,
+
+      '& .MuiSvgIcon-root': {
+        color: theme.palette.primary.main,
+      },
     },
   }),
 );

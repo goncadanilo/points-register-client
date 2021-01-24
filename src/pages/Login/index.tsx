@@ -34,12 +34,12 @@ const Login: React.FC = () => {
                   type="email"
                   variant="outlined"
                 />
-                <label className={classes.label} htmlFor="senha">
+                <label className={classes.label} htmlFor="password">
                   Senha
                 </label>
                 <TextField
                   className={classes.input}
-                  id="senha"
+                  id="password"
                   type="password"
                   variant="outlined"
                 />

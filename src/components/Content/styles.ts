@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column',
       justifyContent: 'flex-start',
       alignItems: 'center',
-      marginTop: '50px',
+      marginTop: '10px',
       marginBottom: '50px',
     },
   }),
