@@ -2,7 +2,7 @@ import { Card, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from './styles';
 
-const PointsData: React.FC = () => {
+const UsersData: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -14,17 +14,17 @@ const PointsData: React.FC = () => {
     >
       <Grid sm={5} container item>
         <Typography variant="h2" gutterBottom>
-          Colaborador
+          Nome
         </Typography>
       </Grid>
       <Grid sm={4} container item>
         <Typography variant="h2" gutterBottom>
-          Data
+          Email
         </Typography>
       </Grid>
       <Grid sm={2} container item>
         <Typography variant="h2" gutterBottom>
-          Hora
+          Tipo Usuário
         </Typography>
       </Grid>
 
@@ -34,14 +34,14 @@ const PointsData: React.FC = () => {
           <Typography variant="h2">João Silva</Typography>
         </Grid>
         <Grid sm={4} item>
-          <Typography variant="h3">12/10/19</Typography>
+          <Typography variant="h3">joao@brainny.cc</Typography>
         </Grid>
         <Grid sm={2} item>
-          <Typography variant="h4">9:00h</Typography>
+          <Typography variant="h3">Colaborador</Typography>
         </Grid>
       </Card>
     </Grid>
   );
 };
 
-export default PointsData;
+export default UsersData;

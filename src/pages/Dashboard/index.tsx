@@ -7,7 +7,7 @@ import PointsData from '../../components/PointsData';
 const Dashboard: React.FC = () => {
   return (
     <AppContainer>
-      <NavBar />
+      <NavBar active="dashboard" />
       <Content>
         <PointsData />
       </Content>

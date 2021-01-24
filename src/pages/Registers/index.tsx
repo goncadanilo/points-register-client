@@ -1,7 +1,11 @@
 import { TextField } from '@material-ui/core';
 import React from 'react';
 import AppContainer from '../../components/AppContainer';
+<<<<<<< HEAD
 import { default as AppModal } from '../../components/AppModal';
+=======
+import AppModal from '../../components/AppModal';
+>>>>>>> feature/employees-page
 import Content from '../../components/Content';
 import NavBar from '../../components/NavBar';
 import PointsData from '../../components/PointsData';
@@ -12,10 +16,14 @@ export const Registers: React.FC = () => {
 
   return (
     <AppContainer>
-      <NavBar />
+      <NavBar active="registers" />
 
       <Content>
+<<<<<<< HEAD
         <AppModal buttonText="Registrar">
+=======
+        <AppModal buttonText="Registrar" title="Novo Registro">
+>>>>>>> feature/employees-page
           <form className={classes.form} autoComplete="off">
             <label className={classes.label} htmlFor="user">
               Colaborador
