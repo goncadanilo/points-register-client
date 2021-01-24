@@ -11,9 +11,10 @@ import { useStyles } from './styles';
 interface Props {
   children: JSX.Element[] | JSX.Element;
   buttonText: string;
+  title: string;
 }
 
-const AppModal: React.FC<Props> = ({ children, buttonText }) => {
+const AppModal: React.FC<Props> = ({ children, buttonText, title }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -42,7 +43,7 @@ const AppModal: React.FC<Props> = ({ children, buttonText }) => {
           paper: classes.dialogPaper,
         }}
       >
-        <DialogTitle id="dialog">Novo Registro</DialogTitle>
+        <DialogTitle id="dialog">{title}</DialogTitle>
         <DialogContent dividers>{children}</DialogContent>
         <DialogActions
           classes={{

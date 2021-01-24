@@ -16,7 +16,11 @@ import { Link } from 'react-router-dom';
 import logoSmall from '../../assets/logo-small.svg';
 import { useStyles } from './styles';
 
-const NavBar: React.FC = () => {
+interface Props {
+  active: string;
+}
+
+const NavBar: React.FC<Props> = ({ active }) => {
   const classes = useStyles();
 
   return (
@@ -36,45 +40,87 @@ const NavBar: React.FC = () => {
             <List className={classes.list}>
               <Divider className={classes.divider} />
 
-              <Link className={classes.active} to="/">
-                <ListItem className={classes.listItem}>
-                  <ListItemIcon className={classes.listItemIcon}>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    className={classes.listItemText}
-                    primary="Dashboard"
-                  />
-                </ListItem>
-              </Link>
+              {active === 'dashboard' ? (
+                <Link className={classes.link} to="/">
+                  <ListItem className={classes.active}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Dashboard"
+                    />
+                  </ListItem>
+                </Link>
+              ) : (
+                <Link className={classes.link} to="/">
+                  <ListItem className={classes.listItem}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Dashboard"
+                    />
+                  </ListItem>
+                </Link>
+              )}
 
               <Divider className={classes.divider} />
 
-              <Link className={classes.link} to="/registers">
-                <ListItem className={classes.listItem}>
-                  <ListItemIcon className={classes.listItemIcon}>
-                    <AssignmentIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    className={classes.listItemText}
-                    primary="Meus Registros"
-                  />
-                </ListItem>
-              </Link>
+              {active === 'registers' ? (
+                <Link className={classes.link} to="/registers">
+                  <ListItem className={classes.active}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <AssignmentIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Meus Registros"
+                    />
+                  </ListItem>
+                </Link>
+              ) : (
+                <Link className={classes.link} to="/registers">
+                  <ListItem className={classes.listItem}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <AssignmentIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Meus Registros"
+                    />
+                  </ListItem>
+                </Link>
+              )}
 
               <Divider className={classes.divider} />
 
-              <Link className={classes.link} to="/">
-                <ListItem className={classes.listItem}>
-                  <ListItemIcon className={classes.listItemIcon}>
-                    <PeopleAltIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    className={classes.listItemText}
-                    primary="Colaboradores"
-                  />
-                </ListItem>
-              </Link>
+              {active === 'users' ? (
+                <Link className={classes.link} to="/users">
+                  <ListItem className={classes.active}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <PeopleAltIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Usuários"
+                    />
+                  </ListItem>
+                </Link>
+              ) : (
+                <Link className={classes.link} to="/users">
+                  <ListItem className={classes.listItem}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <PeopleAltIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Usuários"
+                    />
+                  </ListItem>
+                </Link>
+              )}
 
               <Divider className={classes.divider} />
             </List>

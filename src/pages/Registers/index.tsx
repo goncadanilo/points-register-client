@@ -12,10 +12,10 @@ export const Registers: React.FC = () => {
 
   return (
     <AppContainer>
-      <NavBar />
+      <NavBar active="registers" />
 
       <Content>
-        <AppModal buttonText="Registrar">
+        <AppModal buttonText="Registrar" title="Novo Registro">
           <form className={classes.form} autoComplete="off">
             <label className={classes.label} htmlFor="user">
               Colaborador

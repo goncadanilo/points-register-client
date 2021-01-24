@@ -63,10 +63,17 @@ export const useStyles = makeStyles((theme: Theme) =>
       color: '#A5A5A5',
     },
     active: {
-      width: '100%',
-      textDecoration: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: '20px',
+      paddingBottom: '20px',
+      cursor: 'pointer',
+
       color: theme.palette.primary.main,
       borderLeft: `5px solid ${theme.palette.primary.main}`,
+      paddingLeft: '11px',
 
       '& .MuiSvgIcon-root': {
         color: theme.palette.primary.main,
