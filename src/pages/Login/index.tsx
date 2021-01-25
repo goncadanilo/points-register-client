@@ -1,3 +1,4 @@
+import { gql, useMutation } from '@apollo/client';
 import {
   Button,
   Card,
@@ -7,12 +8,56 @@ import {
   Grid,
   TextField,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { useStyles } from './styles';
 
+const LOGIN_USER = gql`
+  mutation($email: String!, $password: String!) {
+    login(data: { email: $email, password: $password }) {
+      user {
+        id
+        name
+        role
+      }
+      token
+    }
+  }
+`;
+
 const Login: React.FC = () => {
+  const history = useHistory();
   const classes = useStyles();
+
+  const [email, setEmail] = useState<String>('');
+  const [password, setPassword] = useState<String>('');
+
+  const [login, { data }] = useMutation(LOGIN_USER);
+
+  useEffect(() => {
+    if (data) {
+      const { login } = data;
+      const { token } = login;
+
+      localStorage.setItem('token', token);
+
+      history.push('/');
+    }
+  }, [data, history]);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert('Preencha todos os campos!');
+      return;
+    }
+
+    login({ variables: { email, password } });
+    setEmail('');
+    setPassword('');
+  }
 
   return (
     <Container className={classes.container} maxWidth={false}>
@@ -23,8 +68,8 @@ const Login: React.FC = () => {
 
         <Grid sm={5} className={classes.right} item>
           <Card className={classes.card} variant="outlined">
-            <CardContent className={classes.cardContent}>
-              <form autoComplete="off">
+            <form autoComplete="off" onSubmit={handleSubmit}>
+              <CardContent className={classes.cardContent}>
                 <label className={classes.label} htmlFor="email">
                   Email
                 </label>
@@ -33,6 +78,8 @@ const Login: React.FC = () => {
                   id="email"
                   type="email"
                   variant="outlined"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                 />
                 <label className={classes.label} htmlFor="password">
                   Senha
@@ -42,19 +89,22 @@ const Login: React.FC = () => {
                   id="password"
                   type="password"
                   variant="outlined"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
                 />
-              </form>
-            </CardContent>
+              </CardContent>
 
-            <CardActions>
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-              >
-                Login
-              </Button>
-            </CardActions>
+              <CardActions>
+                <Button
+                  className={classes.button}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Login
+                </Button>
+              </CardActions>
+            </form>
           </Card>
         </Grid>
       </Grid>

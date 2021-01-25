@@ -40,19 +40,6 @@ const NavBar: React.FC<Props> = ({ active }) => {
             <List className={classes.list}>
               <Divider className={classes.divider} />
 
-<<<<<<< HEAD
-              <Link className={classes.active} to="/">
-                <ListItem className={classes.listItem}>
-                  <ListItemIcon className={classes.listItemIcon}>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    className={classes.listItemText}
-                    primary="Dashboard"
-                  />
-                </ListItem>
-              </Link>
-=======
               {active === 'dashboard' ? (
                 <Link className={classes.link} to="/">
                   <ListItem className={classes.active}>
@@ -78,7 +65,6 @@ const NavBar: React.FC<Props> = ({ active }) => {
                   </ListItem>
                 </Link>
               )}
->>>>>>> feature/employees-page
 
               <Divider className={classes.divider} />
 
@@ -142,7 +128,11 @@ const NavBar: React.FC<Props> = ({ active }) => {
 
           <div>
             <List className={classes.list}>
-              <ListItem className={classes.listItem} button>
+              <ListItem
+                className={classes.listItem}
+                onClick={() => localStorage.removeItem('token')}
+                button
+              >
                 <ListItemIcon className={classes.listItemIcon}>
                   <ExitToAppIcon />
                 </ListItemIcon>
