@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./src/assets/logo.svg" width="200" alt="Register Logo" />
+  <img src=".github/layout/logo.png" width="80%" alt="Register Logo" />
 </p>
 
 <p align="center">
