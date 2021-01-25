@@ -57,7 +57,7 @@ export const Registers: React.FC = () => {
       return <></>;
     }
 
-    return <PointsData data={data} />;
+    return <PointsData data={data.findRegistersByUserId} />;
   }
 
   return (

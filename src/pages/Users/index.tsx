@@ -61,7 +61,7 @@ const Users: React.FC = () => {
       return <></>;
     }
 
-    return <UsersData data={data} />;
+    return <UsersData data={data.findAllUsers} />;
   }
 
   async function handleSubmit() {
