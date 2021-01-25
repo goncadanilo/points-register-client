@@ -12,9 +12,15 @@ interface Props {
   children: JSX.Element[] | JSX.Element;
   buttonText: string;
   title: string;
+  handleSubmit: any;
 }
 
-const AppModal: React.FC<Props> = ({ children, buttonText, title }) => {
+const AppModal: React.FC<Props> = ({
+  children,
+  buttonText,
+  title,
+  handleSubmit,
+}) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -53,7 +59,7 @@ const AppModal: React.FC<Props> = ({ children, buttonText, title }) => {
           <Button
             className={classes.actionsButton}
             variant="contained"
-            onClick={handleModal}
+            onClick={() => handleSubmit().then(handleModal)}
             color="primary"
           >
             Salvar

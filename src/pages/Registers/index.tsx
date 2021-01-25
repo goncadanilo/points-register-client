@@ -15,7 +15,11 @@ export const Registers: React.FC = () => {
       <NavBar active="registers" />
 
       <Content>
-        <AppModal buttonText="Registrar" title="Novo Registro">
+        <AppModal
+          handleSubmit={() => {}}
+          buttonText="Registrar"
+          title="Novo Registro"
+        >
           <form className={classes.form} autoComplete="off">
             <label className={classes.label} htmlFor="user">
               Colaborador

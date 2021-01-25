@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { useStyles } from './styles';
 
-export const LOGIN_USER = gql`
+const LOGIN_USER = gql`
   mutation($email: String!, $password: String!) {
     login(data: { email: $email, password: $password }) {
       user {
