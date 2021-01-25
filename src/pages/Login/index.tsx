@@ -40,16 +40,12 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-      const { login } = data;
-      const { token, user } = login;
+      const { token, user } = data.login;
 
       handleLogin(token, user);
 
-      if (user.role === 'ADMINISTRATOR') {
-        history.push('/');
-      }
-
-      history.push('/registers');
+      const path = user.role === 'ADMINISTRATOR' ? '/' : '/registers';
+      history.push(path);
     }
   }, [data, handleLogin, history]);
 

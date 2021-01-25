@@ -18,8 +18,8 @@ const CREATE_REGISTER = gql`
 `;
 
 const FIND_REGISTERS_BY_USER_ID = gql`
-  query {
-    findRegistersByUserId {
+  query($id: String!) {
+    findRegistersByUserId(id: $id) {
       id
       timeRegistered
       userConnection {
@@ -49,7 +49,9 @@ export const Registers: React.FC = () => {
   }
 
   function Registers() {
-    const { data, loading } = useQuery(FIND_REGISTERS_BY_USER_ID);
+    const { data, loading } = useQuery(FIND_REGISTERS_BY_USER_ID, {
+      variables: { id: currentUser.id },
+    });
 
     if (loading) {
       return <></>;
