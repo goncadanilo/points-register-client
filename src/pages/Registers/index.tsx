@@ -44,12 +44,8 @@ export const Registers: React.FC = () => {
       return;
     }
 
-    try {
-      createRegister({ variables: { timeRegistered } });
-      setTimeRegistered('');
-    } catch (e) {
-      alert(e.message);
-    }
+    createRegister({ variables: { timeRegistered } });
+    setTimeRegistered('');
   }
 
   function Registers() {

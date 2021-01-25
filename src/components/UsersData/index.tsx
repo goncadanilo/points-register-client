@@ -2,7 +2,20 @@ import { Card, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from './styles';
 
-const UsersData: React.FC = () => {
+interface Props {
+  data?: {
+    findAllUsers: [
+      {
+        id: string;
+        name: string;
+        email: string;
+        role: string;
+      },
+    ];
+  };
+}
+
+const UsersData: React.FC<Props> = ({ data }) => {
   const classes = useStyles();
 
   return (
@@ -28,18 +41,38 @@ const UsersData: React.FC = () => {
         </Typography>
       </Grid>
 
-      <Card className={classes.card} variant="outlined">
-        <div className={classes.verticalDivider}></div>
-        <Grid sm={4} item>
-          <Typography variant="h2">João Silva</Typography>
-        </Grid>
-        <Grid sm={4} item>
-          <Typography variant="h3">joao@brainny.cc</Typography>
-        </Grid>
-        <Grid sm={2} item>
-          <Typography variant="h3">Colaborador</Typography>
-        </Grid>
-      </Card>
+      {data ? (
+        data.findAllUsers.map(item => (
+          <Card key={item.id} className={classes.card} variant="outlined">
+            <div className={classes.verticalDivider}></div>
+            <Grid sm={4} item>
+              <Typography variant="h2">{item.name}</Typography>
+            </Grid>
+            <Grid sm={4} item>
+              <Typography variant="h3">{item.email}</Typography>
+            </Grid>
+            <Grid sm={2} item>
+              <Typography variant="h3">
+                {item.role === 'ADMINISTRATOR'
+                  ? 'Administrador'
+                  : 'Colaborador'}
+              </Typography>
+            </Grid>
+          </Card>
+        ))
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '20vh',
+            width: '100%',
+          }}
+        >
+          <h1>Nenhum registro encontrado!</h1>
+        </div>
+      )}
     </Grid>
   );
 };

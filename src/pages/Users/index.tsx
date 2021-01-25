@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   FormControlLabel,
   Radio,
@@ -33,6 +33,17 @@ const CREATE_USER = gql`
   }
 `;
 
+const FIND_ALL_USERS = gql`
+  query {
+    findAllUsers {
+      id
+      name
+      email
+      role
+    }
+  }
+`;
+
 const Users: React.FC = () => {
   const classes = useStyles();
 
@@ -42,6 +53,16 @@ const Users: React.FC = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   const [createUser] = useMutation(CREATE_USER);
+
+  function Users() {
+    const { data, loading } = useQuery(FIND_ALL_USERS);
+
+    if (loading) {
+      return <></>;
+    }
+
+    return <UsersData data={data} />;
+  }
 
   async function handleSubmit() {
     if (!name || !email || !password) {
@@ -122,7 +143,7 @@ const Users: React.FC = () => {
           </form>
         </AppModal>
 
-        <UsersData />
+        <Users />
       </Content>
     </AppContainer>
   );

@@ -12,7 +12,7 @@ import DashboardIcon from '@material-ui/icons/DashboardOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined';
 import PeopleAltIcon from '@material-ui/icons/PeopleAltOutlined';
 import React, { useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logoSmall from '../../assets/logo-small.svg';
 import { Context } from '../../contexts/AuthContext';
 import { useStyles } from './styles';
@@ -70,20 +70,17 @@ const NavBar: React.FC<Props> = ({ active }) => {
                   </Link>
                 )
               ) : (
-                <>
-                  <Redirect to="/registers" />
-                  <Link className={classes.link} to="/registers">
-                    <ListItem className={classes.blocked}>
-                      <ListItemIcon className={classes.listItemIcon}>
-                        <DashboardIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className={classes.listItemText}
-                        primary="Dashboard"
-                      />
-                    </ListItem>
-                  </Link>
-                </>
+                <Link className={classes.link} to="/registers">
+                  <ListItem className={classes.blocked}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Dashboard"
+                    />
+                  </ListItem>
+                </Link>
               )}
 
               <Divider className={classes.divider} />
@@ -143,20 +140,17 @@ const NavBar: React.FC<Props> = ({ active }) => {
                   </Link>
                 )
               ) : (
-                <>
-                  <Redirect to="/registers" />
-                  <Link className={classes.link} to="/registers">
-                    <ListItem className={classes.blocked}>
-                      <ListItemIcon className={classes.listItemIcon}>
-                        <PeopleAltIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className={classes.listItemText}
-                        primary="Usuários"
-                      />
-                    </ListItem>
-                  </Link>
-                </>
+                <Link className={classes.link} to="/registers">
+                  <ListItem className={classes.blocked}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <PeopleAltIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary="Usuários"
+                    />
+                  </ListItem>
+                </Link>
               )}
 
               <Divider className={classes.divider} />

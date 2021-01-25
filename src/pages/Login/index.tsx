@@ -44,7 +44,12 @@ const Login: React.FC = () => {
       const { token, user } = login;
 
       handleLogin(token, user);
-      history.push('/');
+
+      if (user.role === 'ADMINISTRATOR') {
+        history.push('/');
+      }
+
+      history.push('/registers');
     }
   }, [data, handleLogin, history]);
 
