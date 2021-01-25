@@ -1,5 +1,6 @@
+import { gql, useMutation } from '@apollo/client';
 import { TextField } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import AppContainer from '../../components/AppContainer';
 import AppModal from '../../components/AppModal';
 import Content from '../../components/Content';
@@ -7,8 +8,30 @@ import NavBar from '../../components/NavBar';
 import PointsData from '../../components/PointsData';
 import { useStyles } from './styles';
 
+const CREATE_REGISTER = gql`
+  mutation($timeRegistered: DateTime!) {
+    createRegister(data: { timeRegistered: $timeRegistered }) {
+      id
+    }
+  }
+`;
+
 export const Registers: React.FC = () => {
   const classes = useStyles();
+
+  const [timeRegistered, setTimeRegistered] = useState<String>('');
+
+  const [createRegister] = useMutation(CREATE_REGISTER);
+
+  async function handleSubmit() {
+    if (!timeRegistered) {
+      alert('Preencha todos os campos!');
+      return;
+    }
+
+    createRegister({ variables: { timeRegistered } });
+    setTimeRegistered('');
+  }
 
   return (
     <AppContainer>
@@ -16,7 +39,7 @@ export const Registers: React.FC = () => {
 
       <Content>
         <AppModal
-          handleSubmit={() => {}}
+          handleSubmit={handleSubmit}
           buttonText="Registrar"
           title="Novo Registro"
         >
@@ -39,6 +62,8 @@ export const Registers: React.FC = () => {
               type="datetime-local"
               variant="outlined"
               className={classes.input}
+              value={timeRegistered}
+              onChange={e => setTimeRegistered(e.target.value)}
             />
           </form>
         </AppModal>
