@@ -3,16 +3,14 @@ import React from 'react';
 import { useStyles } from './styles';
 
 interface Props {
-  data?: {
-    findAllUsers: [
-      {
-        id: string;
-        name: string;
-        email: string;
-        role: string;
-      },
-    ];
-  };
+  data?: [
+    {
+      id: string;
+      name: string;
+      email: string;
+      role: string;
+    },
+  ];
 }
 
 const UsersData: React.FC<Props> = ({ data }) => {
@@ -41,8 +39,8 @@ const UsersData: React.FC<Props> = ({ data }) => {
         </Typography>
       </Grid>
 
-      {data ? (
-        data.findAllUsers.map(item => (
+      {data && data.length > 0 ? (
+        data.map(item => (
           <Card key={item.id} className={classes.card} variant="outlined">
             <div className={classes.verticalDivider}></div>
             <Grid sm={4} item>

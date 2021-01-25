@@ -3,17 +3,15 @@ import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 
 interface Props {
-  data?: {
-    findRegistersByUserId: [
-      {
-        id: string;
-        timeRegistered: Date;
-        userConnection: {
-          name: string;
-        };
-      },
-    ];
-  };
+  data?: [
+    {
+      id: string;
+      timeRegistered: Date;
+      userConnection: {
+        name: string;
+      };
+    },
+  ];
 }
 
 const PointsData: React.FC<Props> = ({ data }) => {
@@ -44,8 +42,8 @@ const PointsData: React.FC<Props> = ({ data }) => {
         </Typography>
       </Grid>
 
-      {data ? (
-        data.findRegistersByUserId.map(item => (
+      {data && data.length > 0 ? (
+        data.map(item => (
           <Card key={item.id} className={classes.card} variant="outlined">
             <div className={classes.verticalDivider}></div>
             <Grid sm={4} item>

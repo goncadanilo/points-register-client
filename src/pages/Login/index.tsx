@@ -6,8 +6,10 @@ import {
   CardContent,
   Container,
   Grid,
+  Snackbar,
   TextField,
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
@@ -36,7 +38,12 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<String>('');
   const [password, setPassword] = useState<String>('');
 
-  const [login, { data }] = useMutation(LOGIN_USER);
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>('');
+
+  const [login, { data, error }] = useMutation(LOGIN_USER, {
+    errorPolicy: 'all',
+  });
 
   useEffect(() => {
     if (data) {
@@ -47,20 +54,35 @@ const Login: React.FC = () => {
       const path = user.role === 'ADMINISTRATOR' ? '/' : '/registers';
       history.push(path);
     }
-  }, [data, handleLogin, history]);
+
+    if (error) {
+      setAlertMessage('Email/Senha incorretos!');
+      setOpenAlert(true);
+    }
+  }, [data, error, handleLogin, history]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (!email || !password) {
-      alert('Preencha todos os campos!');
+      setAlertMessage('Preencha todos os campos!');
+      setOpenAlert(true);
       return;
     }
 
     login({ variables: { email, password } });
+
     setEmail('');
     setPassword('');
   }
+
+  const handleCloseAlert = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
 
   return (
     <Container className={classes.container} maxWidth={false}>
@@ -111,6 +133,17 @@ const Login: React.FC = () => {
           </Card>
         </Grid>
       </Grid>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={openAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert onClose={handleCloseAlert} severity="error">
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
