@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import AppContainer from '../../components/AppContainer';
@@ -16,12 +16,25 @@ const CREATE_REGISTER = gql`
   }
 `;
 
+const FIND_REGISTERS_BY_USER_ID = gql`
+  query {
+    findRegistersByUserId {
+      id
+      timeRegistered
+      userConnection {
+        name
+      }
+    }
+  }
+`;
+
 export const Registers: React.FC = () => {
   const classes = useStyles();
 
   const [timeRegistered, setTimeRegistered] = useState<String>('');
 
   const [createRegister] = useMutation(CREATE_REGISTER);
+  const { data } = useQuery(FIND_REGISTERS_BY_USER_ID);
 
   async function handleSubmit() {
     if (!timeRegistered) {
@@ -29,8 +42,12 @@ export const Registers: React.FC = () => {
       return;
     }
 
-    createRegister({ variables: { timeRegistered } });
-    setTimeRegistered('');
+    try {
+      createRegister({ variables: { timeRegistered } });
+      setTimeRegistered('');
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   return (
@@ -68,7 +85,7 @@ export const Registers: React.FC = () => {
           </form>
         </AppModal>
 
-        <PointsData />
+        <PointsData data={data} />
       </Content>
     </AppContainer>
   );
