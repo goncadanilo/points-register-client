@@ -63,12 +63,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       color: '#A5A5A5',
     },
     active: {
-<<<<<<< HEAD
-      width: '100%',
-      textDecoration: 'none',
-      color: theme.palette.primary.main,
-      borderLeft: `5px solid ${theme.palette.primary.main}`,
-=======
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -80,7 +74,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.primary.main,
       borderLeft: `5px solid ${theme.palette.primary.main}`,
       paddingLeft: '11px',
->>>>>>> feature/employees-page
 
       '& .MuiSvgIcon-root': {
         color: theme.palette.primary.main,

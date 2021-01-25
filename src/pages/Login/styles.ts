@@ -41,7 +41,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     cardContent: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       padding: '8px',
     },
     label: {
