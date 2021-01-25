@@ -1,6 +1,7 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-import { TextField } from '@material-ui/core';
-import React, { useContext, useState } from 'react';
+import { Snackbar, TextField } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import React, { useContext, useEffect, useState } from 'react';
 import AppContainer from '../../components/AppContainer';
 import AppModal from '../../components/AppModal';
 import Content from '../../components/Content';
@@ -34,13 +35,23 @@ export const Registers: React.FC = () => {
 
   const { currentUser } = useContext(Context);
 
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>('');
   const [timeRegistered, setTimeRegistered] = useState<String>('');
 
-  const [createRegister] = useMutation(CREATE_REGISTER);
+  const [createRegister, { error }] = useMutation(CREATE_REGISTER);
+
+  useEffect(() => {
+    if (error) {
+      setAlertMessage('Error ao criar o registro!');
+      setOpenAlert(true);
+    }
+  }, [error]);
 
   async function handleSubmit() {
     if (!timeRegistered) {
-      alert('Preencha todos os campos!');
+      setAlertMessage('Preencha o campo Data/Hora!');
+      setOpenAlert(true);
       return;
     }
 
@@ -59,6 +70,14 @@ export const Registers: React.FC = () => {
 
     return <PointsData data={data.findRegistersByUserId} />;
   }
+
+  const handleCloseAlert = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
 
   return (
     <AppContainer>
@@ -97,6 +116,17 @@ export const Registers: React.FC = () => {
 
         <Registers />
       </Content>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={openAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert onClose={handleCloseAlert} severity="error">
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </AppContainer>
   );
 };

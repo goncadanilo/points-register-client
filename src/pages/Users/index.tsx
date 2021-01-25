@@ -3,9 +3,11 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  Snackbar,
   TextField,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Alert } from '@material-ui/lab';
+import React, { useEffect, useState } from 'react';
 import AppContainer from '../../components/AppContainer';
 import AppModal from '../../components/AppModal';
 import Content from '../../components/Content';
@@ -52,7 +54,17 @@ const Users: React.FC = () => {
   const [password, setPassword] = useState<String>('');
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-  const [createUser] = useMutation(CREATE_USER);
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>('');
+
+  const [createUser, { error }] = useMutation(CREATE_USER);
+
+  useEffect(() => {
+    if (error) {
+      setAlertMessage('Erro ao criar o usuário!');
+      setOpenAlert(true);
+    }
+  }, [error]);
 
   function Users() {
     const { data, loading } = useQuery(FIND_ALL_USERS);
@@ -66,7 +78,8 @@ const Users: React.FC = () => {
 
   async function handleSubmit() {
     if (!name || !email || !password) {
-      alert('Preencha todos os campos!');
+      setAlertMessage('Preencha todos os campos!');
+      setOpenAlert(true);
       return;
     }
 
@@ -75,6 +88,14 @@ const Users: React.FC = () => {
     setEmail('');
     setPassword('');
   }
+
+  const handleCloseAlert = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
 
   return (
     <AppContainer>
@@ -145,6 +166,17 @@ const Users: React.FC = () => {
 
         <Users />
       </Content>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={openAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert onClose={handleCloseAlert} severity="error">
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </AppContainer>
   );
 };

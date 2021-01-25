@@ -61,7 +61,7 @@ const AppModal: React.FC<Props> = ({
             variant="contained"
             onClick={() => handleSubmit().then(handleModal)}
             color="primary"
-            type="submit"
+            type="button"
           >
             Salvar
           </Button>
