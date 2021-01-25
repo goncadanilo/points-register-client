@@ -62,6 +62,10 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## ⚡ Como rodar
 
+### Requisitos
+
+- [Points Register - API](https://github.com/goncadanilo/points-register-api).
+
 ### Intalar as dependências
 
 - instale as dependências: `yarn`.
