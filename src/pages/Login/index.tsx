@@ -8,9 +8,10 @@ import {
   Grid,
   TextField,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
+import { Context } from '../../contexts/AuthContext';
 import { useStyles } from './styles';
 
 const LOGIN_USER = gql`
@@ -30,6 +31,8 @@ const Login: React.FC = () => {
   const history = useHistory();
   const classes = useStyles();
 
+  const { handleLogin } = useContext(Context);
+
   const [email, setEmail] = useState<String>('');
   const [password, setPassword] = useState<String>('');
 
@@ -38,13 +41,12 @@ const Login: React.FC = () => {
   useEffect(() => {
     if (data) {
       const { login } = data;
-      const { token } = login;
+      const { token, user } = login;
 
-      localStorage.setItem('token', token);
-
+      handleLogin(token, user);
       history.push('/');
     }
-  }, [data, history]);
+  }, [data, handleLogin, history]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

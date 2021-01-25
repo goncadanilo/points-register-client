@@ -79,5 +79,15 @@ export const useStyles = makeStyles((theme: Theme) =>
         color: theme.palette.primary.main,
       },
     },
+    blocked: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: '20px',
+      paddingBottom: '20px',
+      cursor: 'not-allowed',
+      color: '#A5A5A5',
+    },
   }),
 );

@@ -1,11 +1,12 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AppContainer from '../../components/AppContainer';
 import AppModal from '../../components/AppModal';
 import Content from '../../components/Content';
 import NavBar from '../../components/NavBar';
 import PointsData from '../../components/PointsData';
+import { Context } from '../../contexts/AuthContext';
 import { useStyles } from './styles';
 
 const CREATE_REGISTER = gql`
@@ -31,10 +32,11 @@ const FIND_REGISTERS_BY_USER_ID = gql`
 export const Registers: React.FC = () => {
   const classes = useStyles();
 
+  const { currentUser } = useContext(Context);
+
   const [timeRegistered, setTimeRegistered] = useState<String>('');
 
   const [createRegister] = useMutation(CREATE_REGISTER);
-  const { data } = useQuery(FIND_REGISTERS_BY_USER_ID);
 
   async function handleSubmit() {
     if (!timeRegistered) {
@@ -48,6 +50,16 @@ export const Registers: React.FC = () => {
     } catch (e) {
       alert(e.message);
     }
+  }
+
+  function Registers() {
+    const { data, loading } = useQuery(FIND_REGISTERS_BY_USER_ID);
+
+    if (loading) {
+      return <></>;
+    }
+
+    return <PointsData data={data} />;
   }
 
   return (
@@ -68,7 +80,7 @@ export const Registers: React.FC = () => {
               className={classes.input}
               id="user"
               variant="outlined"
-              value="João Silva"
+              value={currentUser.name}
               disabled
             />
             <label className={classes.label} htmlFor="datetime">
@@ -85,7 +97,7 @@ export const Registers: React.FC = () => {
           </form>
         </AppModal>
 
-        <PointsData data={data} />
+        <Registers />
       </Content>
     </AppContainer>
   );
