@@ -63,6 +63,7 @@ const Users: React.FC = () => {
     if (error) {
       setAlertMessage('Erro ao criar o usuário!');
       setOpenAlert(true);
+      return;
     }
   }, [error]);
 
@@ -79,6 +80,12 @@ const Users: React.FC = () => {
   async function handleSubmit() {
     if (!name || !email || !password) {
       setAlertMessage('Preencha todos os campos!');
+      setOpenAlert(true);
+      return;
+    }
+
+    if (password.length < 6) {
+      setAlertMessage('Senha deve ter pelo menos 6 caracteres!');
       setOpenAlert(true);
       return;
     }
@@ -130,7 +137,7 @@ const Users: React.FC = () => {
               onChange={e => setEmail(e.target.value)}
             />
             <label className={classes.label} htmlFor="password">
-              Senha
+              Senha (min 6 caracteres)
             </label>
             <TextField
               id="password"
