@@ -6,15 +6,19 @@ import Login from '../pages/Login';
 import Registers from '../pages/Registers';
 import Users from '../pages/Users';
 
-function CustomRoute({ isPrivate, admOnly, ...rest }: any) {
+function CustomRoute({ isPrivate, admin, employee, ...rest }: any) {
   const { authenticated, currentUser } = useContext(Context);
 
   if (isPrivate && !authenticated) {
     return <Redirect to="/login" />;
   }
 
-  if (admOnly && currentUser.role !== 'ADMINISTRATOR') {
+  if (admin && currentUser.role !== 'ADMINISTRATOR') {
     return <Redirect to="/registers" />;
+  }
+
+  if (employee && currentUser.role !== 'EMPLOYEE') {
+    return <Redirect to="/" />;
   }
 
   return <Route {...rest} />;
@@ -25,9 +29,14 @@ const Routes = (): JSX.Element => {
     <BrowserRouter>
       <Switch>
         <CustomRoute component={Login} path="/login" />
-        <CustomRoute isPrivate admOnly component={Dashboard} path="/" exact />
-        <CustomRoute isPrivate component={Registers} path="/registers" />
-        <CustomRoute isPrivate admOnly component={Users} path="/users" />
+        <CustomRoute isPrivate admin component={Dashboard} path="/" exact />
+        <CustomRoute
+          isPrivate
+          employee
+          component={Registers}
+          path="/registers"
+        />
+        <CustomRoute isPrivate admin component={Users} path="/users" />
       </Switch>
     </BrowserRouter>
   );

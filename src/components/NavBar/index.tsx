@@ -85,21 +85,35 @@ const NavBar: React.FC<Props> = ({ active }) => {
 
               <Divider className={classes.divider} />
 
-              {active === 'registers' ? (
-                <Link className={classes.link} to="/registers">
-                  <ListItem className={classes.active}>
-                    <ListItemIcon className={classes.listItemIcon}>
-                      <AssignmentIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      className={classes.listItemText}
-                      primary="Meus Registros"
-                    />
-                  </ListItem>
-                </Link>
+              {currentUser.role === 'EMPLOYEE' ? (
+                active === 'registers' ? (
+                  <Link className={classes.link} to="/registers">
+                    <ListItem className={classes.active}>
+                      <ListItemIcon className={classes.listItemIcon}>
+                        <AssignmentIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className={classes.listItemText}
+                        primary="Meus Registros"
+                      />
+                    </ListItem>
+                  </Link>
+                ) : (
+                  <Link className={classes.link} to="/registers">
+                    <ListItem className={classes.listItem}>
+                      <ListItemIcon className={classes.listItemIcon}>
+                        <AssignmentIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className={classes.listItemText}
+                        primary="Meus Registros"
+                      />
+                    </ListItem>
+                  </Link>
+                )
               ) : (
-                <Link className={classes.link} to="/registers">
-                  <ListItem className={classes.listItem}>
+                <Link className={classes.link} to="/">
+                  <ListItem className={classes.blocked}>
                     <ListItemIcon className={classes.listItemIcon}>
                       <AssignmentIcon />
                     </ListItemIcon>
